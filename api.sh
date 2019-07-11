@@ -10,6 +10,11 @@ sudo apt install mongodb -y
 sudo npm -g install @angular/cli -y
 
 
+sudo npm cache clean -f
+sudo npm install -g n
+sudo n stable
+
+
 sudo useradd --create-home api
 sudo usermod --shell /bin/bash api
 
