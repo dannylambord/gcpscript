@@ -12,8 +12,19 @@ npm --version
 yes | sudo npm install -g @angular/cli
 ng --version
 
-sudo cp pool-manager-api.service ~/../../etc/systemd/system/
-sudo cp pool-manager-ui.service ~/../../etc/systemd/system/
+echo >> api.service
+echo "[Unit]" >> api.service
+echo 'Description=api' >> api.service
+echo  >> api.service
+echo "[Service]" >> api.service
+echo 'user = ui' >> api.service
+echo 'ExecStart=/usr/bin/node /home/ui/poolmanager-api/test.js' >> api.service
+echo  >> api.service
+echo "[Install]" >> api.service
+echo 'WantedBy=multi-user.target' >> api.service
+
+sudo mv api.service /etc/systemd/system/api.service
+
 
 mkdir ~/pool-manager
 cd ~/pool-manager
