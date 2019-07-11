@@ -12,7 +12,7 @@ sudo n stable
 
 sudo apt install mongodb -y
 yes | sudo npm -g install @angular/cli 
-sudo npm -g install mongoose -y
+
 
 
 
@@ -61,6 +61,7 @@ cd ../
 git clone https://github.com/yamileon/poolmanager-api.git
 cd poolmanager-api
 git checkout dev
+sudo npm install
 
 
 
