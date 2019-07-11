@@ -61,7 +61,7 @@ cd ../
 git clone https://github.com/yamileon/poolmanager-api.git
 cd poolmanager-api
 git checkout dev
-sudo npm install
+npm install
 
 
 
