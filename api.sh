@@ -1,12 +1,12 @@
 #! /bin/bash
 
-sudo apt update
-sudo apt upgrade
+sudo apt update -y
+sudo apt upgrade -y
 
-sudo apt install nodejs
+sudo apt install nodejs -y
 
-sudo apt install mongodb
-sudo npm -g install @angular/cli
+sudo apt install mongodb -y
+sudo npm -g install @angular/cli -y
 
 
 sudo useradd --create-home api
