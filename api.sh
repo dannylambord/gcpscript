@@ -11,7 +11,7 @@ sudo npm install -g n
 sudo n stable
 
 sudo apt install mongodb -y
-sudo npm -g install @angular/cli -y
+yes | sudo npm -g install @angular/cli 
 sudo npm -g install mongoose -y
 
 
