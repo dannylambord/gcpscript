@@ -45,11 +45,13 @@ sudo su - ui << EOF
 git clone https://github.com/yamileon/poolmanage-ui.git
 pwd
 cd poolmanage-ui
+git checkout furr-dev2
 
 
 cd ../
 git clone https://github.com/yamileon/poolmanager-api.git
 cd poolmanager-api
+git checkout dev
 
 
 
