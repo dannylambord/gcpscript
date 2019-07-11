@@ -27,23 +27,6 @@ echo 'WantedBy=multi-user.target' >> api.service
 
 sudo  mv api.service /etc/systemd/system/api.service
 
-
-sudo su - ui << EOF 
-git clone https://github.com/yamileon/poolmanage-ui.git
-pwd
-cd poolmanage-ui
-git checkout danny/sully
-
-cd ../
-git clone https://github.com/yamileon/poolmanager-api.git
-cd poolmanager-api
-git checkout Danny/Sully
-
-
-exit
-EOF 
-
-
 echo >> ui.service
 echo "[Unit]" >> ui.service
 echo'Description = ui' >> ui.service
@@ -57,9 +40,22 @@ echo 'WantedBy = multi-user.target' >> ui.service
 
 sudo mv ui.service /etc/systemd/system/ui.service
 
-sudo su - api << EOF
-echo "Test"
-EOF
+
+sudo su - ui << EOF 
+git clone https://github.com/yamileon/poolmanage-ui.git
+pwd
+cd poolmanage-ui
+
+
+cd ../
+git clone https://github.com/yamileon/poolmanager-api.git
+cd poolmanager-api
+
+
+
+exit
+EOF 
+
 sudo systemctl daemon-reload
 
 sudo systemctl start mongodb
