@@ -56,8 +56,8 @@ yes n | sudo npm install
 
 sudo systemctl daemon-reload
 
-sudo systemctl enable pool-manager-api
-sudo systemctl enable pool-manager-ui
+sudo systemctl enable api
+sudo systemctl enable ui
 
-sudo systemctl start pool-manager-api
-sudo systemctl start pool-manager-ui
+sudo systemctl start api
+sudo systemctl start ui
