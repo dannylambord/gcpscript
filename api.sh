@@ -6,14 +6,16 @@ sudo apt upgrade -y
 sudo apt install nodejs -y
 sudo apt install npm -y
 
+sudo npm cache clean -f
+sudo npm install -g n
+sudo n stable
+
 sudo apt install mongodb -y
 sudo npm -g install @angular/cli -y
 sudo npm -g install mongoose -y
 
 
-sudo npm cache clean -f
-sudo npm install -g n
-sudo n stable
+
 
 
 sudo useradd --create-home api
