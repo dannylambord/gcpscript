@@ -8,6 +8,7 @@ sudo apt install npm -y
 
 sudo apt install mongodb -y
 sudo npm -g install @angular/cli -y
+sudo npm -g install mongoose -y
 
 
 sudo npm cache clean -f
