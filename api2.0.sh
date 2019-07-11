@@ -25,6 +25,19 @@ echo 'WantedBy=multi-user.target' >> api.service
 
 sudo mv api.service /etc/systemd/system/api.service
 
+echo >> ui.service
+echo "[Unit]" >> ui.service
+echo'Description = ui' >> ui.service
+echo >> ui.service
+echo '[Service]' >> ui.service
+
+echo 'WorkingDirectory=/home/ui/poolmanage-ui' >> ui.service
+echo 'ExecStart= /usr/bin/ng s --host 0.0.0.0' >> ui.service
+echo "[Install]" >> ui.service
+echo 'WantedBy = multi-user.target' >> ui.service
+
+sudo mv ui.service /etc/systemd/system/ui.service
+
 
 mkdir ~/pool-manager
 cd ~/pool-manager
