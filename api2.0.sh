@@ -1,63 +1,49 @@
-#!bin/bash
-sudo apt update -y
-sudo apt upgrade -y
-sudo apt-get install -y mongodb
-sudo sed -i 's/127.0.0.1/0.0.0.0/g' ~/../../etc/mongodb.conf
-sudo service mongodb start
-#sudo apt-get install git
-sudo curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-sudo apt-get install nodejs -y
-node --version
-npm --version
-yes | sudo npm install -g @angular/cli
-ng --version
+sudo apt update
 
-echo >> api.service
-echo "[Unit]" >> api.service
-echo 'Description=api' >> api.service
-echo  >> api.service
-echo "[Service]" >> api.service
-echo 'user = ui' >> api.service
-echo 'ExecStart=/usr/bin/node /home/ui/poolmanager-api/test.js' >> api.service
-echo  >> api.service
-echo "[Install]" >> api.service
-echo 'WantedBy=multi-user.target' >> api.service
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+sudo apt-get install -y nodejs
 
-sudo mv api.service /etc/systemd/system/api.service
+sudo apt install -y mongodb
 
-echo >> ui.service
-echo "[Unit]" >> ui.service
-echo'Description = ui' >> ui.service
-echo >> ui.service
-echo '[Service]' >> ui.service
+git clone -b furr-dev2 https://github.com/yamileon/poolmanage-ui.git
+git clone -b dev https://github.com/yamileon/poolmanager-api.git
 
-echo 'WorkingDirectory=/home/ui/poolmanage-ui' >> ui.service
-echo 'ExecStart= /usr/bin/ng s --host 0.0.0.0' >> ui.service
-echo "[Install]" >> ui.service
-echo 'WantedBy = multi-user.target' >> ui.service
-
-sudo mv ui.service /etc/systemd/system/ui.service
-
-
-mkdir ~/pool-manager
-cd ~/pool-manager
-git clone https://github.com/yamileon/poolmanager-api ~/pool-manager/poolmanager-api
-git clone https://github.com/yamileon/poolmanage-ui ~/pool-manager/poolmanager-ui
-ls -lrt
-sudo chown -R "$(whoami)" ~/pool-manager/poolmanager-ui
-
-cd ~/pool-manager/poolmanager-api
-git checkout dev
+cd ~/poolmanage-ui
 sudo npm install
-echo "export const enviroment = { production: false,url:'http://35.246.90.33:8081'};" > ~/pool-manager/poolmanager-ui/src/enviroments/enviroments.ts
-cd ~/pool-manager/poolmanager-ui
-git checkout dev2.0
-yes n | sudo npm install
+
+cd ~/poolmanager-api
+sudo npm install 
+
+echo '[Unit]
+Description=ui server
+[Service]
+User=sulayman_com
+WorkingDirectory=/home/sulayman_com/poolmanage-ui
+ExecStart=/usr/bin/npm run startg
+[Install]
+WantedBy=multi-user.target' | sudo tee /etc/systemd/system/poolmanagerui.service
+
+
+echo '[Unit]
+Description=api server
+[Service]
+User=yamileon_xfz
+WorkingDirectory=/home/sulayman_com/poolmanager-api
+ExecStart=/usr/bin/node /home/sulayman_com/poolmanager-api/index.js
+[Install]
+WantedBy=multi-user.target' | sudo tee /etc/systemd/system/poolmanagerapi.service
+
+echo "export const environment = {
+  production: false,
+  url: 'http://"$1":8080'
+};" > ~/poolmanage-ui/src/environments/environment.ts
+
+sudo systemctl start poolmanagerapi
+
+sudo systemctl enable poolmanagerapi
+
+sudo systemctl start poolmanagerui
+
+sudo systemctl enable poolmanagerui
 
 sudo systemctl daemon-reload
-
-sudo systemctl enable api
-sudo systemctl enable ui
-
-sudo systemctl start api
-sudo systemctl start ui
