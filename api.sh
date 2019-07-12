@@ -43,7 +43,7 @@ echo >> ui.service
 echo '[Service]' >> ui.service
 
 echo 'WorkingDirectory=/home/ui/poolmanage-ui' >> ui.service
-echo 'ExecStart= /usr/bin/node_modules/@angular/cli//bin/ng s --host 0.0.0.0' >> ui.service
+echo 'ExecStart= /usr/bin/node_modules/@angular/cli/bin/ng s --host 0.0.0.0' >> ui.service
 echo "[Install]" >> ui.service
 echo 'WantedBy = multi-user.target' >> ui.service
 
