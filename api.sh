@@ -54,6 +54,7 @@ sudo su - ui << EOF
 git clone https://github.com/yamileon/poolmanage-ui.git
 pwd
 cd poolmanage-ui
+npm install
 git checkout furr-dev2
 
 
